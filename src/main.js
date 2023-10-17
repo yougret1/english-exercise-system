@@ -1,0 +1,20 @@
+import Vue from 'vue'
+import App from './App.vue'
+import router from './router'
+import ElementUI, { Message } from 'element-ui'
+import axios from './utils/request'
+import storage from './utils/storage'
+import 'element-ui/lib/theme-chalk/index.css'
+import './config/polyfill' // 注意文件路径
+import * as ECharts from 'echarts'
+
+Vue.config.productionTip = false
+Vue.use(ElementUI)
+Vue.prototype.$echarts = ECharts
+Vue.prototype.$http = axios
+Vue.prototype.$storage = storage
+Vue.prototype.$message = Message
+new Vue({
+  router,
+  render: (h) => h(App)
+}).$mount('#app')
