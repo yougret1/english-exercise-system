@@ -11,26 +11,17 @@ const routes = [
   {
     path: '/login',
     name: 'login',
-    component: () => import('../views/login/Login.vue'),
+    component: () => import('@/views/login/Login.vue'),
     meta: {
       title: '英语真题练习系统'
     }
+  },
+  {
+    path: '/exam/:examId',
+    name: 'exam',
+    component: () => import('@/views/secCatalog/SecCatalog.vue')
   }
 ]
-// {
-//   path: '/student',
-//   name: 'student',
-//   component: () => import('../views/student/QuestionDetail.vue'),
-//   children: [
-//     {
-//       path: '/student/questionListHome/:exerId',
-//       component: () => import('../views/student/QuestionListHome.vue'),
-//       meta: {
-//         title: '题目列表'
-//       }
-//     }
-//   ]
-// }
 
 const router = new VueRouter({
   routes,

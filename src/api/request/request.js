@@ -2,7 +2,7 @@
  * axios二次封装
  */
 import axios from 'axios'
-import storage from './storage'
+import storage from '../../store/storage'
 import { Loading, Message } from 'element-ui'
 import { devURL } from './requestConfig'
 // 创建axios 实例对象,添加全局配置

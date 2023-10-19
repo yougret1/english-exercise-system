@@ -1,6 +1,6 @@
 import { createStore } from 'vuex'
 import mutations from './mutation'
-import storage from '../utils/storage'
+import storage from './storage'
 
 const state = {
   userInfo: storage.getItem('userInfo') || {}, // 获取用户信息

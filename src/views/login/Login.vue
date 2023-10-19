@@ -1,16 +1,59 @@
 <template>
-  <div class="container">
-
+  <div class="login">
+    <h1 class=""> 英语真题在线练习系统</h1>
+    <p class="tip-1" style="margin: 3% 5% 0 5%; ">
+      在线训练、听力练习、单词查询、单词本、<span>进度跟踪</span>、<span>查答案，</span><span>一步搞定</span></p>
+    <div v-if="showLoginModal" class="logbox">
+      <div class="wid100 unitSel">
+        <div class="selectway log" @click="showLogin = true">登录</div>
+        <div class="selectway rig" @click="showLogin = false">注册</div>
+      </div>
+      <!-- 登录模态框 -->
+      <div v-if="showLogin" class="modal">
+        <h2>登录</h2>
+        <form @submit.prevent="login">
+          <label for="username">用户名</label>
+          <input type="text" id="username" v-model="loginForm.username">
+          <label for="password">密码</label>
+          <input type="password" id="password" v-model="loginForm.password">
+          <button type="submit" @click="checkLogin">登录</button>
+        </form>
+      </div>
+      <!-- 注册模态框 -->
+      <div v-if="!showLogin" class="modal">
+        <h2>注册</h2>
+        <form @submit.prevent="register">
+          <label for="username">用户名</label>
+          <input type="text" id="username" v-model="registerForm.username">
+          <label for="password">密码</label>
+          <input type="password" id="password" v-model="registerForm.password">
+          <button type="submit" @click="register">注册</button>
+        </form>
+      </div>
+    </div>
+    <div v-if="!showLoginModal" class="modal">
+      <thecatalog>
+      </thecatalog>
+    </div>
+    <div>为浙水学子提供专业的历年英语真题</div>
   </div>
 </template>
 <script>
-import * as emitter from '../../utils/emitter/eventEmitter'
-import { throttle } from '../../utils/throttle/throttle'
+import * as emitter from '@/utils/emitter/eventEmitter'
+import { throttle } from '@/utils/throttle/throttle'
+import thecatalog from '@/components/catalog/Catalog.vue'
+import { userLogin, userRegister } from './../../api/module/user'
 export default {
   name: 'login',
   data () {
     return {
-      formInline: {
+      showLogin: true,
+      showLoginModal: false,
+      loginForm: {
+        username: '',
+        password: ''
+      },
+      registerForm: {
         username: '',
         password: ''
       }
@@ -19,6 +62,9 @@ export default {
   updated () {
     window.addEventListener('keydown', this.KeyDown, { once: true })
   },
+  components: {
+    thecatalog: thecatalog
+  },
   methods: {
     /**
      *@Description: 请求登录，发送表单
@@ -26,15 +72,14 @@ export default {
     */
     async checkLogin () {
       // console.log("now is check login")
-      if (this.formInline.username === '' || this.formInline.password === '') {
+      if (this.loginForm.username === '' || this.loginForm.password === '') {
         // this.$message.warning("必要信息未填写");
         return
       }
-      const res = await this.$http.post('/login', this.formInline)
+      const res = await userLogin(this.loginForm)
       if (res !== '') {
         this.$storage.setItem('token', res.token || '')
-        this.$storage.setItem('role', res.role || '')
-        this.$storage.setItem('username', this.formInline.username || '')
+        this.$storage.setItem('username', this.loginForm.username || '')
       }
       if (res.role === 'ROLE_STUDENT') {
         emitter.emit('isLogin', { message: true })
@@ -42,8 +87,8 @@ export default {
       } else {
         this.$router.push('/teacher')
       }
-      this.formInline.password = ''
-      this.formInline.username = ''
+      this.loginForm.password = ''
+      this.loginForm.username = ''
     },
     /**
      *@Description: 注册
@@ -54,7 +99,7 @@ export default {
         this.$message.warning('必要信息未填写')
         return
       }
-      await this.$http.post('/register', this.formInline)
+      await userRegister('/register', this.formInline)
       this.formInline.username = ''
     },
     /**
@@ -72,7 +117,18 @@ export default {
     */
     throttledCheckLogin () {
       throttle(this.checkLogin(), 2000)
+    },
+    /**
+     *@Description:展示目录框
+     *@Date: 2023-10-18 10:21:11
+    */
+    showcatalog () {
+      this.showLoginModal = !this.showLoginModal
     }
   }
 }
 </script>
+
+<style lang="scss">
+@import "./Login.scss";
+</style>

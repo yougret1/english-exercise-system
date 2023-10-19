@@ -6,7 +6,6 @@
 export default {
   setItem (key, val) {
     const storage = this.getStorage()
-    // 这里的this 很巧妙引入后是A.getStorage, A.setItem,这里的this指向A
     storage[key] = val // 只能用[] 不能以.的形式
     window.localStorage.setItem('userInfo', JSON.stringify(storage))
   },

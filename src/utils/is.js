@@ -17,3 +17,29 @@ export const isNull = (value) => {
   }
   return false
 }
+/**
+ *@Description: 判断是否为字符串
+ *@MethodAuthor: Yougret
+ *@Date: 2023-10-19 09:17:52
+*/
+export const isString = (value) => {
+  return typeof value === 'string'
+}
+
+/**
+ *@Description: 判断是否为数组
+ *@MethodAuthor: Yougret
+ *@Date: 2023-10-19 09:18:04
+*/
+export const isArray = (value) => {
+  return Array.isArray(value)
+}
+
+/**
+ *@Description: 判断是否为布尔值
+ *@MethodAuthor: Yougret
+ *@Date: 2023-10-19 09:18:07
+*/
+export const isBoolean = (value) => {
+  return typeof value === 'boolean'
+}
