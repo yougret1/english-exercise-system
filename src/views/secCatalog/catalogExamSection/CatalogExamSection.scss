@@ -1,0 +1,91 @@
+$cardWidth: 280px;
+.catalogExamSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .card {
+    position: relative;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border-radius: 0.25rem;
+    display: inline-block;
+    width: $cardWidth;
+    margin: 20px;
+    height: 395px;
+    border: none;
+    transition: ease-out 0.3s transform;
+    color: #fff;
+    box-shadow: 0.3px 0.5px 0.7px rgba(0, 0, 0, 0.36),
+      0.8px 1.6px 2px -0.8px rgba(0, 0, 0, 0.36),
+      2.1px 4.1px 5.2px -1.7px rgba(0, 0, 0, 0.36),
+      5px 10px 12.6px -2.5px rgba(0, 0, 0, 0.36);
+    .card-body {
+      position: absolute;
+      box-sizing: border-box;
+      width: $cardWidth;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.8);
+      text-align: left;
+    }
+    .card-img-top {
+      width: 100%;
+      border-top-left-radius: calc(0.25rem - 1px);
+      border-top-right-radius: calc(0.25rem - 1px);
+    }
+    .card-body {
+      -ms-flex: 1 1 auto;
+      flex: 1 1 auto;
+      padding: 1.25rem;
+      progress {
+        margin-top: 10px;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        border: none;
+        height: 10px;
+        width: 100%;
+      }
+      progress {
+        vertical-align: baseline;
+      }
+      progress::-webkit-progress-inner-element {
+        box-sizing: inherit;
+        -webkit-user-modify: read-only;
+        block-size: 100%;
+        inline-size: 100%;
+      }
+      progress::-webkit-progress-bar {
+        background: #e9e5e2;
+        background-image: linear-gradient(top, #e1ddd9, #e9e5e2);
+        border-radius: 10px;
+        -moz-box-shadow: 0 1px 0px #bebbb9 inset, 0 1px 0 #fcfcfc;
+        -webkit-box-shadow: 0 1px 0px #bebbb9 inset, 0 1px 0 #fcfcfc;
+        box-shadow: 0 1px 0px #bebbb9 inset, 0 1px 0 #fcfcfc;
+      }
+      progress::-webkit-progress-value {
+        border-radius: 10px;
+        margin: 1px;
+        box-shadow: 0 1px 0px #fcfcfc inset, 0 1px 0 #bebbb9;
+        background-color: #79b7fb;
+        background-image: -webkit-linear-gradient(to bottom, #79b7fb, #659bd5);
+        background-image: -webkit-gradient(
+          linear,
+          left top,
+          left bottom,
+          from(#79b7fb),
+          to(#659bd5)
+        );
+        background-image: -webkit-linear-gradient(to bottom, #79b7fb, #659bd5);
+        background-image: -moz-linear-gradient(to bottom, #79b7fb, #659bd5);
+        background-image: -ms-linear-gradient(to bottom, #79b7fb, #659bd5);
+        background-image: -o-linear-gradient(to bottom, #79b7fb, #659bd5);
+        background-image: linear-gradient(to bottom, #79b7fb, #659bd5);
+      }
+    }
+  }
+  .card    :hover {
+    transform: scale(1.03);
+  }
+}
