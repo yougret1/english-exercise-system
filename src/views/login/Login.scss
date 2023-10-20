@@ -9,7 +9,14 @@ $leftfix: 5px;
   background-color: #fff;
   min-height: 400px;
   min-width: 400px;
-  .modal{
+
+  box-shadow: 0.3px 0.5px 0.7px rgba(0, 0, 0, 0.36),
+    0.8px 1.6px 2px -0.8px rgba(0, 0, 0, 0.36),
+    2.1px 4.1px 5.2px -1.7px rgba(0, 0, 0, 0.36),
+    5px 10px 12.6px -2.5px rgba(0, 0, 0, 0.36);
+  background-color: #fff;
+
+  .modal {
     width: 70%;
     // height: 0%;
     min-width: 400px;

@@ -1,6 +1,6 @@
 <template>
   <div class="login">
-    <h1 class=""> 英语真题在线练习系统</h1>
+    <h1 class="mt-4"> 英语真题在线练习系统</h1>
     <p class="tip-1" style="margin: 3% 5% 0 5%; ">
       在线训练、听力练习、单词查询、单词本、<span>进度跟踪</span>、<span>查答案，</span><span>一步搞定</span></p>
     <div v-if="showLoginModal" class="logbox">
@@ -35,7 +35,7 @@
       <thecatalog>
       </thecatalog>
     </div>
-    <div>为浙水学子提供专业的历年英语真题</div>
+    <div style="margin-bottom: 1rem;" >为浙水学子提供专业的历年英语真题</div>
   </div>
 </template>
 <script>
