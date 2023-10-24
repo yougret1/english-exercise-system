@@ -1,7 +1,7 @@
 <!--  -->
 <template>
   <div class="catalogExamSection">
-    <a class="link-primary" href="/kaoyan/2022/02">
+    <a class="link-primary" @click="jumpToNewRoute" >
       <div class="card">
         <picture>
           <source :srcset="basURL"
@@ -11,7 +11,6 @@
         </picture>
         <div class="card-body">
           <div class="title_num">2022年考研英语二</div><progress max="100" value="42">
-
           </progress>
         </div>
       </div>
@@ -25,12 +24,26 @@ import * as emitter from '@/utils/emitter/eventEmitter'
 export default {
   data () {
     return {
-      basURL: require('../../../assets/kaoyan/picData/2022二.jpg')
+      basURL: require('../../../assets/kaoyan/picData/2022二.jpg'),
+      title: '2022',
+      sel: '01',
+      belong: 'kaoyan',
+      newURL: '2022二'
     }
   },
   methods: {
     changePicURL (param) {
+      console.log(param)
+      this.title = param.year
+      this.sel = param.sel
+      this.belong = param.belong
+      this.newURL = param.newURL
       this.basURL = require('../../../assets/' + param.belong + '/picData/' + param.newURL + '.jpg')
+    },
+    jumpToNewRoute (param) {
+      console.log(this.newURL)
+      emitter.emit('examURL', { newURL: this.newURL })
+      this.$router.push('/' + this.belong + '/' + this.title + '/' + this.sel)
     }
   },
   // 生命周期 - 创建完成（访问当前this实例）

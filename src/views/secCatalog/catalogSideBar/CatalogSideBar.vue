@@ -11,7 +11,7 @@
             </template>
             <el-menu-item
               v-for="(childItem, childIndex) in item.exams" :key="childIndex" :index="childItem.name"
-              @click="showNewPic(textData.belong,childItem.picName)"
+              @click="showNewPic(textData.belong,childItem.picName,item.title,childItem.sel)"
               style="overflow: hidden;">
               {{ childItem.name }}
             </el-menu-item>
@@ -32,9 +32,9 @@ export default {
     }
   },
   methods: {
-    showNewPic (belong, param) {
+    showNewPic (belong, param, title, sel) {
       // console.log(param)
-      emitter.emit('picChange', { belong: belong, newURL: param })
+      emitter.emit('picChange', { belong: belong, newURL: param, year: title, sel: sel })
     }
 
   },
