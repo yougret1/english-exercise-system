@@ -3,7 +3,7 @@
     <el-row class="tac">
       <el-col :span="12">
         <h5 style="">{{ textData.name }}试卷目录</h5>
-        <el-menu class="el-menu-vertical-demo" unique-opened=true>
+        <el-menu class="el-menu-vertical-demo" :unique-opened=true>
           <el-submenu v-for="(item, index) in textData.data" :key="index" :index="item.title">
             <template slot="title">
               <i class="el-icon-location"></i>
@@ -33,7 +33,7 @@ export default {
   },
   methods: {
     showNewPic (belong, param) {
-      console.log(param)
+      // console.log(param)
       emitter.emit('picChange', { belong: belong, newURL: param })
     }
 

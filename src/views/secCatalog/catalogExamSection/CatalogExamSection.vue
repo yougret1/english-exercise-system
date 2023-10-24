@@ -4,10 +4,9 @@
     <a class="link-primary" href="/kaoyan/2022/02">
       <div class="card">
         <picture>
-          <source :srcset="basURL + picURL" type="image/webp">
-          <source :srcset="basURL + picURL"
+          <source :srcset="basURL"
             type="image/jpg"><img class="card-img-top"
-            :src="basURL + picURL"
+            :src="basURL"
             style="width:280px;height:395px;" alt="2022年考研英语二">
         </picture>
         <div class="card-body">
@@ -26,13 +25,12 @@ import * as emitter from '@/utils/emitter/eventEmitter'
 export default {
   data () {
     return {
-      basURL: '../../../assets/',
-      picURL: 'kaoyan/picData/2022二.jpg'
+      basURL: require('../../../assets/kaoyan/picData/2022二.jpg')
     }
   },
   methods: {
-    changePicURL (belong, name) {
-      this.picURL = belong + '/picData/' + name + '.jpg'
+    changePicURL (param) {
+      this.basURL = require('../../../assets/' + param.belong + '/picData/' + param.newURL + '.jpg')
     }
   },
   // 生命周期 - 创建完成（访问当前this实例）
@@ -42,7 +40,8 @@ export default {
   // 生命周期 - 挂载完成（访问DOM元素）
   mounted () {
     emitter.on('picChange', event => {
-      this.changePicURL(event)
+      // console.log(111)
+      this.changePicURL(event.detail)
     })
   }
 
