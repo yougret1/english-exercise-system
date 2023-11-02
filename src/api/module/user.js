@@ -6,6 +6,7 @@ import axios from '../../api/request/request'
 */
 export const userLogin = async (params) => {
   const res = await axios.post('/login', params)
+  // console.log(res.data)
   return res
 }
 /**
@@ -14,6 +15,7 @@ export const userLogin = async (params) => {
  *@Date: 2023-10-19 09:37:30
 */
 export const userRegister = async (params) => {
+  // console.log(params)
   const res = await axios.post('/register', params)
   return res
 }

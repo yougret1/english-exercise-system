@@ -33,7 +33,7 @@ export default {
   },
   methods: {
     showNewPic (belong, param, title, sel) {
-      // console.log(param)
+      // console.log(...arguments)
       emitter.emit('picChange', { belong: belong, newURL: param, year: title, sel: sel })
     }
 

@@ -7,7 +7,7 @@ export default {
       exams: [
         {
           name: '2023年全国硕士研究生入学统一考试英语(一)',
-          picName: '2022一',
+          picName: '2023一',
           sel: '01'
         },
         {

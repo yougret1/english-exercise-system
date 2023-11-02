@@ -7,8 +7,10 @@ import { Loading, Message } from 'element-ui'
 import { devURL } from './requestConfig'
 // 创建axios 实例对象,添加全局配置
 const service = axios.create({
+  timeout: 5000,
   baseURL: null
 })
+
 // 请求拦截
 
 service.interceptors.request.use((req) => {

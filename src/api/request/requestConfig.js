@@ -1,1 +1,1 @@
-export const devURL = 'http://10.147.19.51:8081/ees/api'
+export const devURL = 'http://192.168.138.174:8190/ees/api'

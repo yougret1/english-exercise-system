@@ -3,6 +3,8 @@
     <h1 class="mt-4"> 英语真题在线练习系统</h1>
     <p class="tip-1" style="margin: 3% 5% 0 5%; ">
       在线训练、听力练习、单词查询、单词本、<span>进度跟踪</span>、<span>查答案，</span><span>一步搞定</span></p>
+    <p v-if="!showLoginModal" class="tip-1" style="margin: 1% 5% 0 5%; " @click="showLoginModal=true">登录/注册</p>
+    <p v-if="showLoginModal" class="tip-1" style="margin: 1% 5% 0 5%; " @click="showLoginModal=false">进入学习</p>
     <div v-if="showLoginModal" class="logbox">
       <div class="wid100 unitSel">
         <div class="selectway log" @click="showLogin = true">登录</div>
@@ -11,23 +13,30 @@
       <!-- 登录模态框 -->
       <div v-if="showLogin" class="modal">
         <h2>登录</h2>
-        <form @submit.prevent="login">
+        <form @submit.prevent="checkLogin">
+          <div>
           <label for="username">用户名</label>
           <input type="text" id="username" v-model="loginForm.username">
+        </div>
+      <div>
           <label for="password">密码</label>
           <input type="password" id="password" v-model="loginForm.password">
-          <button type="submit" @click="checkLogin">登录</button>
+        </div>
+          <button type="submit">登录</button>
         </form>
       </div>
       <!-- 注册模态框 -->
       <div v-if="!showLogin" class="modal">
         <h2>注册</h2>
         <form @submit.prevent="register">
+          <div>
           <label for="username">用户名</label>
           <input type="text" id="username" v-model="registerForm.username">
+        </div><div>
           <label for="password">密码</label>
           <input type="password" id="password" v-model="registerForm.password">
-          <button type="submit" @click="register">注册</button>
+        </div>
+          <button type="submit">注册</button>
         </form>
       </div>
     </div>
@@ -42,7 +51,7 @@
 import * as emitter from '@/utils/emitter/eventEmitter'
 import { throttle } from '@/utils/throttle/throttle'
 import thecatalog from '@/components/catalog/Catalog.vue'
-import { userLogin, userRegister } from './../../api/module/user'
+import { userLogin, userRegister } from '@/api/module/user'
 export default {
   name: 'login',
   data () {
@@ -77,6 +86,7 @@ export default {
         return
       }
       const res = await userLogin(this.loginForm)
+      console.log(res)
       if (res !== '') {
         this.$storage.setItem('token', res.token || '')
         this.$storage.setItem('username', this.loginForm.username || '')
@@ -95,12 +105,12 @@ export default {
      *@Date: 2023-07-10 10:23:11
     */
     async register () {
-      if (this.formInline.username === '' || this.formInline.password === '') {
+      if (this.registerForm.username === '' || this.registerForm.password === '') {
         this.$message.warning('必要信息未填写')
         return
       }
-      await userRegister('/register', this.formInline)
-      this.formInline.username = ''
+      await userRegister(this.registerForm)
+      this.registerForm.username = ''
     },
     /**
      *@Description: 对事件的监听进行响应，开始检查登录
