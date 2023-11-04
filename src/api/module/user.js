@@ -19,3 +19,13 @@ export const userRegister = async (params) => {
   const res = await axios.post('/register', params)
   return res
 }
+/**
+ *@Description: 用户退出
+ *@MethodAuthor: Yougret
+ *@Date: 2023-10-19 09:37:30
+*/
+export const logout = async () => {
+  const res = await axios.get('/logout')
+  console.log("退出成功！！")
+  return res
+}

@@ -3,8 +3,8 @@
     <h1 class="mt-4"> 英语真题在线练习系统</h1>
     <p class="tip-1" style="margin: 3% 5% 0 5%; ">
       在线训练、听力练习、单词查询、单词本、<span>进度跟踪</span>、<span>查答案，</span><span>一步搞定</span></p>
-    <p v-if="!showLoginModal" class="tip-1" style="margin: 1% 5% 0 5%; " @click="showLoginModal=true">登录/注册</p>
-    <p v-if="showLoginModal" class="tip-1" style="margin: 1% 5% 0 5%; " @click="showLoginModal=false">进入学习</p>
+    <p v-if="showLoginModal" class="tip-1" style="margin: 1% 5% 0 5%; ">登录/注册</p>
+    <p v-if="!showLoginModal" class="tip-1" style="margin: 1% 5% 0 5%; " @click="logout">退出</p>
     <div v-if="showLoginModal" class="logbox">
       <div class="wid100 unitSel">
         <div class="selectway log" @click="showLogin = true">登录</div>
@@ -51,13 +51,13 @@
 import * as emitter from '@/utils/emitter/eventEmitter'
 import { throttle } from '@/utils/throttle/throttle'
 import thecatalog from '@/components/catalog/Catalog.vue'
-import { userLogin, userRegister } from '@/api/module/user'
+import { userLogin, userRegister, logout } from '@/api/module/user'
 export default {
   name: 'login',
   data () {
     return {
       showLogin: true,
-      showLoginModal: false,
+      showLoginModal: true,
       loginForm: {
         username: '',
         password: ''
@@ -75,6 +75,16 @@ export default {
     thecatalog: thecatalog
   },
   methods: {
+    async logout () {
+      this.$confirm('确定要退出登录？', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        logout()
+        this.showLoginModal = true
+      })
+    },
     /**
      *@Description: 请求登录，发送表单
      *@Date: 2023-07-10 10:06:39
@@ -93,9 +103,9 @@ export default {
       }
       if (res.role === 'ROLE_STUDENT') {
         emitter.emit('isLogin', { message: true })
-        this.$router.push('/practice')
+        this.showLoginModal = false
       } else {
-        this.$router.push('/teacher')
+        alert('无法进入')
       }
       this.loginForm.password = ''
       this.loginForm.username = ''

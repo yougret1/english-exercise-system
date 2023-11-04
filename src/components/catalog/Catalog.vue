@@ -12,7 +12,6 @@
 export default {
   methods: {
     jumpToNewRoute (param) {
-      console.log(11)
       this.$router.push('/exam/' + param)
     }
   }
