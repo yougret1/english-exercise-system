@@ -2,18 +2,18 @@
   <div class="catalogSideBar">
     <el-row class="tac">
       <el-col :span="12">
-        <h5 style="">{{ textData.name }}试卷目录</h5>
+        <h5 style="">{{ name }}试卷目录</h5>
         <el-menu class="el-menu-vertical-demo" :unique-opened=true>
-          <el-submenu v-for="(item, index) in textData.data" :key="index" :index="item.title">
+          <el-submenu v-for="(item, index) in textData" :key="index" :index="item.typeName">
             <template slot="title">
               <i class="el-icon-location"></i>
-              <span>{{ item.title }}</span>
+              <span>{{ item.typeName }}</span>
             </template>
             <el-menu-item
-              v-for="(childItem, childIndex) in item.exams" :key="childIndex" :index="childItem.name"
-              @click="showNewPic(textData.belong,childItem.picName,item.title,childItem.sel)"
+              v-for="(childItem, childIndex) in item.children" :key="childIndex" :index="childItem.typeName"
+              @click="showNewPic(childItem)"
               style="overflow: hidden;">
-              {{ childItem.name }}
+              {{ childItem.typeName }}
             </el-menu-item>
           </el-submenu>
         </el-menu>
@@ -23,20 +23,30 @@
 </template>
 
 <script>
-import textData from '../../../assets/kaoyan/textData/textData'
 import * as emitter from '@/utils/emitter/eventEmitter'
+import { searchMenuByTypeForm } from '@/api/module/menu'
 export default {
+  props: ['typeName1'],
   data () {
     return {
-      textData: textData
+      textData: [],
+      name: this.typeName1
     }
   },
   methods: {
-    showNewPic (belong, param, title, sel) {
-      // console.log(...arguments)
-      emitter.emit('picChange', { belong: belong, newURL: param, year: title, sel: sel })
+    async loadMenuList () {
+      console.log(this.name)
+      this.textData = await searchMenuByTypeForm({ typeName: this.name })
+      console.log(this.textData)
+      emitter.emit('picChange', this.textData[0].children[0])
+    },
+    showNewPic (current) {
+      emitter.emit('picChange', current)
     }
 
+  },
+  created () {
+    this.loadMenuList()
   },
   mounted () {
   }

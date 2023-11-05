@@ -57,7 +57,7 @@ export default {
   data () {
     return {
       showLogin: true,
-      showLoginModal: true,
+      showLoginModal: false,
       loginForm: {
         username: '',
         password: ''

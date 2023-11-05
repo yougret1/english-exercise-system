@@ -7,10 +7,10 @@
           <source :srcset="basURL"
             type="image/jpg"><img class="card-img-top"
             :src="basURL"
-            style="width:280px;height:395px;" alt="2022年考研英语二">
+            style="width:280px; height:395px;" :alt="typeName">
         </picture>
         <div class="card-body">
-          <div class="title_num">2022年考研英语二</div><progress max="100" value="42">
+          <div class="title_num">{{typeName}}</div><progress max="100" value="42">
           </progress>
         </div>
       </div>
@@ -25,20 +25,14 @@ export default {
   data () {
     return {
       basURL: require('../../../assets/kaoyan/picData/2022二.jpg'),
-      title: '2022',
-      sel: '01',
-      belong: 'kaoyan',
-      newURL: '2022二'
+      typeName: '',
+      belong: 'kaoyan'
     }
   },
   methods: {
     changePicURL (param) {
-      console.log(param)
-      this.title = param.year
-      this.sel = param.sel
-      this.belong = param.belong
-      this.newURL = param.newURL
-      this.basURL = require('../../../assets/' + param.belong + '/picData/' + param.newURL + '.jpg')
+      this.typeName = param.typeName
+      this.basURL = param.img
     },
     jumpToNewRoute (param) {
       console.log(this.newURL)
