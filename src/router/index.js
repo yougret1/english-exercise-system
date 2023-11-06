@@ -22,7 +22,7 @@ const routes = [
     component: () => import('@/views/secCatalog/SecCatalog.vue')
   },
   {
-    path: '/kaoyan/:examId/:year',
+    path: '/kaoyan',
     name: 'kaoyan',
     component: () => import('@/views/kaoyan/KaoYan.vue')
   }

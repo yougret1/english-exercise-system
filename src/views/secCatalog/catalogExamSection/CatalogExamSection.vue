@@ -37,7 +37,7 @@ export default {
     jumpToNewRoute (param) {
       console.log(this.newURL)
       emitter.emit('examURL', { newURL: this.newURL })
-      this.$router.push('/' + this.belong + '/' + this.title + '/' + this.sel)
+      this.$router.push({ path: '/' + this.belong, query: { typeName: this.typeName } })
     }
   },
   // 生命周期 - 创建完成（访问当前this实例）

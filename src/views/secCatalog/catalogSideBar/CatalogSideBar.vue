@@ -35,9 +35,7 @@ export default {
   },
   methods: {
     async loadMenuList () {
-      console.log(this.name)
       this.textData = await searchMenuByTypeForm({ typeName: this.name })
-      console.log(this.textData)
       emitter.emit('picChange', this.textData[0].children[0])
     },
     showNewPic (current) {
