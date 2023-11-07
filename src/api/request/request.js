@@ -59,11 +59,7 @@ request.init = function (option) {
   return service
 }
 request.get = function (url, data, option) {
-  return request.init(option).get(url, {
-    // data数据要给到axios Get请求的 params
-    params: data,
-    ...option
-  })
+  return request.init(option).get(url)
 }
 request.post = function (url, data, option) {
   return request.init(option).post(url, data, option)

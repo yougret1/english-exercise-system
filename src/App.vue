@@ -4,7 +4,7 @@
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "./styles/index.scss";
 @import "./styles/toFormat.scss";
 

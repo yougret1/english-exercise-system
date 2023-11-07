@@ -17,6 +17,7 @@
     "default-passive-events": "^2.0.0",
     "echarts": "^5.4.2",
     "element-ui": "^2.15.13",
+    "js-md5": "^0.8.3",
     "vue": "^2.6.11",
     "vue-codemirror": "^4.0.6",
     "vue-router": "^3.2.0",

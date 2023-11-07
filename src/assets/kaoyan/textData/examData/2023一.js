@@ -1,6 +1,7 @@
 export default {
   name: '202301',
   title: '2023年全国硕士研究生招生考试英语(一)',
+  answer:['C','A','D','C','C','A','B','B','A','D','D','C','C','B','A','B','D','A','D','A','C','B','A','C','D','A','D','B','C','D','A','C','B','A','D','B','C','A','B','D','B','F','D','C','G'],
   data: `
 Section  Ⅰ  UseofEnglish
 Directions:
