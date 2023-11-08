@@ -16,9 +16,14 @@ const service = axios.create({
 service.interceptors.request.use((req) => {
   const headers = req.headers
   // // let loadingInstance = Loading.service();
-  const token = storage.getItem('token') || ''
-  // // console.log("token", token);
-  // if (!headers.token && req.url !== '/ees/practice') {
+  const token1 = storage.getItem('token') || ''
+
+  const userInfo = JSON.parse(window.localStorage.getItem('userInfo')) || {}
+  // 获取 token 的值
+  const token = userInfo.token || ''
+  console.log(token)
+  headers.token = token
+
   headers.Authorization = token
   // }
   return req

@@ -11,6 +11,10 @@
         <div id="title"></div>
         <hr>
         <div id="content"></div>
+        <!-- <div>{{ isInsert}}</div> -->
+        {{ isInsert }}
+        <div v-if="isInsert === false" id="del" @click="del()">移除生词本</div>
+        <div v-if= "isInsert" id="insert" @click="insert()">加入生词本</div>
       </div>
       <div class="memo_arrow"></div>
     </div>
@@ -39,7 +43,7 @@
     </el-drawer>
 
     <div class="footer">
-      <div class="word">单词本</div>
+      <div class="word" @click="jumpToNewRoute()">单词本</div>
       <div class="select" @click="drawer = true">查看答案</div>
     </div>
   </div>
@@ -50,7 +54,7 @@ import MD5 from 'js-md5'
 import * as emitter from '@/utils/emitter/eventEmitter'
 import { getKaoYanExamData } from '../../assets/kaoyan/examData'
 import first2023 from '../../assets/kaoyan/textData/examData/2023一.js'
-import { getByWord } from '@/api/module/exam.js'
+import { getByWord, insertWord, searchByWordAndId, deleteByWord } from '@/api/module/exam.js'
 export default {
   data () {
     return {
@@ -61,6 +65,7 @@ export default {
       beforeNode: '<div></div>',
       show: false,
       postop: null,
+      isInsert: true,
       posleft: null,
       answer: [],
       index: 0,
@@ -94,6 +99,26 @@ export default {
     }
   },
   methods: {
+    jumpToNewRoute () {
+      this.$router.push({ name: 'word' })
+    },
+    async insert () {
+      const word = document.getElementById('title').innerHTML
+      const translate = document.getElementById('content').innerHTML
+      if (word === '' || translate === '') {
+        return
+      }
+      const res = await insertWord({ word: word, translate: translate })
+      console.log(res)
+    },
+    async del () {
+      const word = document.getElementById('title').innerHTML
+      if (word === '') {
+        return
+      }
+      const res = await deleteByWord({ word: word })
+      console.log(res)
+    },
     notShow () {
       for (var i = 0; i < 60; i++) {
         this.answer1[i] = false
@@ -102,6 +127,7 @@ export default {
       this.drawer = true
     },
     isShow (index) {
+      console.log(this.isInsert)
       this.answer1[index] = !this.answer1[index]
       this.drawer = false
       this.drawer = true
@@ -153,7 +179,6 @@ export default {
             a.style.position = 'relative'
             a.style.height = '20px'
           }
-          // console.log(123)
           let str = ''
           let num = ''
           let other = ''
@@ -273,12 +298,20 @@ export default {
           arrow.style.left = eventposleft - this.posleft - 148 + pos.width / 2 + 'px'
           arrow.style.opacity = '1'
           this.beforeNode = event.target
+
           const title = document.getElementById('title')
           const word = event.target.childNodes[0].data
           title.innerText = word
-          // this.getUserPredit(word);
-          // try {
-          // 异步操作
+
+          const res1 = await searchByWordAndId({ word: event.target.childNodes[0].data })
+          console.log('searchByWordAndId res1-----------------' + res1.rows)
+          if (res1.rows > 0) {
+            this.isInsert = false
+            console.log(this.isInsert)
+          } else {
+            this.isInsert = true
+          }
+
           const appid = '20231107001872179'
           const salt = '1435660288'
           const secretkey = 'u8jrpPgcr6ofTE8euJIv'
@@ -287,7 +320,7 @@ export default {
             await getByWord(`/?q=${word}&from=en&to=zh&appid=${appid}&salt=${salt}&sign=${sign}`)
           // res.target_accuracy = Math.round(res.target_accuracy * 10000, 2) / 100
           console.log(res)
-          const resRetdata = res.trans_result[0].dst
+          const resRetdata = res.data.trans_result[0].dst
           const content = document.getElementById('content')
           content.innerHTML = resRetdata[0] !== '/' ? unescape(resRetdata) : resRetdata
         } else {

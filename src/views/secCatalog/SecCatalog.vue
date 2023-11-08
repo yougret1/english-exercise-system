@@ -1,6 +1,6 @@
 <!--  -->
 <template>
-  <div style="">
+  <div style="height: 700px;">
     <CatalogSideBar :typeName1 = "typeName"></CatalogSideBar>
     <div class="title-1 mt-4">
       {{ typeName }}
@@ -39,4 +39,64 @@ export default {
 </script>
 <style scoped>
 /* @import url(); 引入css类 */
+.title-1{
+  font-size: 3rem;
+}
+.tip-1{
+  color:#555;
+  font-size: 0.9rem;
+}
+.row{
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+.year-row{
+  margin-left: 0px;
+  margin-right: 0px;
+}
+.col-12{
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+.card-img-top{
+  width: 100%;
+  border-top-left-radius: calc(0.25rem - 1px);
+
+  border-top-right-radius: calc(0.25rem - 1px);
+}
+.title_num{
+  font-size: 0.9rem;
+}
+.mb-6 {
+  margin-bottom: 6rem !important
+}
+.mb-5 {
+  margin-bottom: 5rem !important
+}
+.m-5{
+  margin: 5rem !important;
+}
+.mt-6{
+  margin-top: 6rem !important;
+}
+.mt-5{
+  margin-top: 5rem !important;
+}
+.mt-4{
+  margin-top: 4rem !important;
+}
+.mt-3{
+  margin-top: 3rem !important;
+}
+.w100{
+  width: 100% !important;
+}
+.wid100{
+  width: 100%;
+}
+.wid70{
+  width: 70%;
+}
 </style>

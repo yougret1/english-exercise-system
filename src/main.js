@@ -15,6 +15,7 @@ Vue.prototype.$http = axios
 Vue.prototype.$storage = storage
 Vue.prototype.$message = Message
 new Vue({
+  strict: false,
   router,
   render: (h) => h(App)
 }).$mount('#app')

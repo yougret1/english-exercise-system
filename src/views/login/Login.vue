@@ -3,7 +3,7 @@
     <h1 class="mt-4"> 英语真题在线练习系统</h1>
     <p class="tip-1" style="margin: 3% 5% 0 5%; ">
       在线训练、听力练习、单词查询、单词本、<span>进度跟踪</span>、<span>查答案，</span><span>一步搞定</span></p>
-    <p v-if="showLoginModal" class="tip-1" style="margin: 1% 5% 0 5%; ">登录/注册</p>
+    <p v-if="showLoginModal" class="tip-1" style="margin: 1% 5% 0 5%; "></p>
     <p v-if="!showLoginModal" class="tip-1" style="margin: 1% 5% 0 5%; " @click="logout">退出</p>
     <div v-if="showLoginModal" class="logbox">
       <div class="wid100 unitSel">
@@ -57,7 +57,7 @@ export default {
   data () {
     return {
       showLogin: true,
-      showLoginModal: false,
+      showLoginModal: true,
       loginForm: {
         username: '',
         password: ''
@@ -100,6 +100,7 @@ export default {
       if (res !== '') {
         this.$storage.setItem('token', res.token || '')
         this.$storage.setItem('username', this.loginForm.username || '')
+        console.log(JSON.parse(window.localStorage.getItem('userInfo')).token)
       }
       if (res.role === 'ROLE_STUDENT') {
         emitter.emit('isLogin', { message: true })

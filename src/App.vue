@@ -8,6 +8,13 @@
 @import "./styles/index.scss";
 @import "./styles/toFormat.scss";
 
+html {
+  // line-height: 1.15;
+  /* 1 */
+  -webkit-text-size-adjust: 100%;
+  /* 2 */
+  width: 100%;
+}
 .icon {
   width: 40px;
   height: 40px;

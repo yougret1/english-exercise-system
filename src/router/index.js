@@ -25,6 +25,11 @@ const routes = [
     path: '/kaoyan',
     name: 'kaoyan',
     component: () => import('@/views/kaoyan/KaoYan.vue')
+  },
+  {
+    path: '/word',
+    name: 'word',
+    component: () => import('@/views/Word.vue')
   }
 ]
 
